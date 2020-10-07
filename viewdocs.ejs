@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WebDocX</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+	<script type="text/javascript" src="/scripts/viewdocs.js"></script>
+	<script type="text/javascript" src="/scripts/speechrecog.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+	<div class="topnav card">
+		
+		<button id="dash" style="float:left">Dashboard</button>
+		<script type="text/javascript">
+			document.getElementById("dash").onclick = function () {
+				location.href = "/dashboardPat";
+			};
+		</script>
+		<button class="dropdown" style="background-color:white;color:black;float:left;">Doctors<i class="fa fa-caret-down"></i></button>
+		<div class="dropdown-content">
+			<a href="#">Link 1</a>
+			<a href="#">Link 2</a>
+			<a href="#">Link 3</a>
+		</div>
+		<button style="float:right;" id="logout">Logout</button>
+		<script>
+			document.getElementById("logout").onclick = function () {
+			location.href = "/logout";
+			};
+		</script>
+		<button type="button" style="float:right;width:50px;" onclick="runSpeechRecognition()"><i id="mic" class="fa fa-microphone"></i></button>
+		<form action="#"style="float:right;">
+			<input type="text" placeholder="Search.." id="search" name="search">
+			<button type="submit" style="width:50px;"><i class="fa fa-search"></i></button>
+		</form>
+	</div>
+	
+	<div class="row">
+		<% for (var i = 0; i < docs.length; i++) { %>
+		<div class="column">
+			<% var image = docs[i].profilePic.data.toString('base64'); %>
+			<% var type = docs[i].profilePic.contentType; %>
+			<div class="col-container card">
+				<div class="col column4" style="background-image: url('data:<%= type %>;base64,<%= image %>'); background-size: 100% 250px; background-repeat: no-repeat;">
+				</div>
+				<div class="col column6" align="center">
+					<h2 align="center">Dr. <%= docs[i].name %></h2>
+					<button class="buttongreen borderless"><%= docs[i].experience %> Years Exp</button>
+					<h4 class="title">Speciality: <%= docs[0].speciality %></h4>
+					<a href="#" class="fa fa-facebook"></a>
+					<a href="#" class="fa fa-twitter"></a>
+					<a href="#" class="fa fa-google"></a>
+					<a href="#" class="fa fa-linkedin"></a>
+					<a href="#" class="fa fa-youtube"></a>
+					<a href="#" class="fa fa-instagram"></a>
+					<p><button class="button" onclick="openForm('<%= docs[i].name %>','<%= docs[i]._id %>')">Consult Now</button></p>
+				</div>
+			</div>
+		</div>
+	<%}%>
+	</div>
+
+	<!--Consult Form-->
+<div class="form-popup" id="consult">
+  <form action="/consult/" class="form-container" id="consultform" name="consultform" method="post">
+
+	<div class="imgcontainer">
+        <span onclick="document.getElementById('consult').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <h1 align="center">Consultation Form</h1>
+		<h2 id="name" align="center"></h2>
+	</div>
+	<label for="psw"><b>Problems</b></label>
+    <input type="text" placeholder="Problems" id=" problems" name="problem" style="width:97%" required><!--get problem by name problem-->
+
+	<label for="psw" style="clear:both"><b>Tags</b></label><br><!--take getElementByname(tags) for tag array-->
+	<input type="hidden" id="ctag" value=1>
+	<input type="text" placeholder="tag1" id="tag1" name="tags" required style="float:left;">
+	<input type="text" placeholder="tag2" id="tag2" name="tags" style="display:none; float:left">
+	<input type="text" placeholder="tag3" id="tag3" name="tags" style="display:none; float:left">
+	<input type="text" placeholder="tag4" id="tag4" name="tags" style="display:none; float:left">
+	<input type="text" placeholder="tag5" id="tag5" name="tags" style="display:none; float:left">
+	<button type="button" onclick="tag()" class="addbtn" id="tagadd"><b>+</b></button>
+
+	<br><label for="psw" style="clear:both"><b>Symptoms</b></label><br><!--take getElementByname(syms) for symptoms array-->
+	<input type="hidden" id="csym" value=1>
+	<input type="text" placeholder="symptom1" id="sym1" name="syms" required style="float:left">
+	<input type="text" placeholder="symptom2" id="sym2" name="syms" style="display:none; float:left">
+	<input type="text" placeholder="symptom3" id="sym3" name="syms" style="display:none; float:left">
+	<input type="text" placeholder="symptom4" id="sym4" name="syms" style="display:none; float:left">
+	<input type="text" placeholder="symptom5" id="sym5" name="syms" style="display:none; float:left">
+	<button type="button" onclick="sym()" class="addbtn" id="symadd"><b>+</b></button>
+	
+	<br><label for="psw"style="clear:both"><b>Description</b></label><br>
+	<textarea iplaceholder="Description" id="description" name="description" style="width:97%; clear:both" required rows="4">
+	</textarea><br><br><!--get description by name description-->
+
+    <button type="submit" class="btn">Submit</button>
+  </form>
+  <button onclick="topFunction()" id="myBtn" title="Go to top"><b>&uarr;</b></button>
+</div>
+</body>
+</html>

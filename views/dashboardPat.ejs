@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WebDocX</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/dashboardPat.css">
+</head>
+<body>
+	<div class="topnav">
+		<button id="dash" style="background-color:white;color:black;">Dashboard</button>
+		<button id="doc" >Doctors</button>
+		<button id="logout" style="float:right;">Logout</button>
+		<script type="text/javascript">
+			document.getElementById("dash").onclick = function () {
+				location.href = "/dashboardPat";
+			};
+			document.getElementById("logout").onclick = function () {
+				location.href = "/logout";
+			};
+		</script>
+	</div>
+<!--Alert messages-->
+	<div class="alert-msg">
+	    <% if (errorMessage && errorMessage.length > 0) { %>
+	      <div class="alert alert-danger" role="alert">
+	        <%= errorMessage %>
+	      </div>
+	    <% } %>
+	    
+	    <% if (successMessage && successMessage.length > 0){ %>
+	      <div class="alert alert-success" role="alert">
+	        <%= successMessage %>
+	      </div>
+	    <% } %>
+	</div>
+	<h1>Patient Dashboard</h1>
+	<li><a href="/view/doctors/cardiology">Doctors with speciality: cardiology</a></li>
+	<li><a href="/view/doctors/nephrology">Doctors with speciality: nephrology</a></li>
+	<li><a href="/view/doctors/urology">Doctors with speciality: urology</a></li>
+	<li><a href="/view/doctors/neurology">Doctors with speciality: neurology</a></li>
+</body>
+</html>

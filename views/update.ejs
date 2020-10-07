@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WebDocX</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/update.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/nav.css">
+	<script type="text/javascript" src="/scripts/update.js"></script>
+	<script type="text/javascript" src="/scripts/speechrecog.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="topnav">
+		<button id="dash" style="float:left">Dashboard</button>
+		<script type="text/javascript">
+			document.getElementById("dash").onclick = function () {
+				location.href = "/dashboardDoc";
+			};
+		</script>
+		<button class="dropdown" style="background-color:white;color:black;float:left;">Doctors<i class="fa fa-caret-down"></i></button>
+		<div class="dropdown-content">
+			<a href="#">Link 1</a>
+			<a href="#">Link 2</a>
+			<a href="#">Link 3</a>
+		</div>
+		
+		<button style="float:right;" id="logout">Logout</button>
+		<script>
+			document.getElementById("logout").onclick = function () {
+			location.href = "/logout";
+			};
+		</script>
+		<button type="button" style="float:right;width:50px;" onclick="runSpeechRecognition()"><i id="mic" class="fa fa-microphone"></i></button>
+		<form action="#"style="float:right;">
+			<input type="text" placeholder="Search.." id="search" name="search">
+			<button type="submit" style="width:50px;"><i class="fa fa-search"></i></button>
+		</form>
+	</div>
+		<% var image = profilePic.data.toString('base64'); %>
+		<% var type = profilePic.contentType; %>
+		<div class="col-container">
+			<div class="col" style="position:relative;width:20%">
+				<div class="card" align="center" style="top:0px; position:absolute;padding:16px; width:80%">
+				<img class="avatar" style="width:150px;height:150px;" src="data:<%= type %>;base64,<%= image %>" />
+				
+				<h3>DR.<%= myAccount.name %> <i class="fa fa-check-circle verified"  id="verified"></i><!--make this visible if verified--></h3>
+				<h3><%= myAccount.username %></h3>
+				</div>
+				<br><br><br>
+				<div align="center">
+					<a  id="p" onclick="personal1()" style="color:black;"><b>Personal Info</b></a><br><br>
+					<a  id="m" onclick="medical1()"><b>Medical Info</b></a><br><br>
+					<a  id="a" onclick="address1()"><b>Address</b></a>
+				</div>
+			</div>
+		
+			<div class="col card" id="update" style=" width:70%">
+				<img class="avatar center" src="data:<%= type %>;base64,<%= image %>" style="width:250px;height:250px;"/>
+				<button id="op" class="roundbtn" onclick="dpopen()" style=" position:absolute; top:250px; right:340px;"><i class="fa fa-pencil"></i></button>
+				<button id="cl" class="roundbtn" onclick="dpclose()" style=" position:absolute; top:250px; right:340px;display:none;"><i class="fa fa-times"></i></button>
+				<form id="dp" style="display:none;">
+					<label  style=" position:absolute; top:260px; right:300px;"><i id="pic" class="fa fa-file-image-o fa-2x"></i><input onchange="chk()" type="file" id="profilepic" style="display:none;" name="profilrpic" accept="image/*" required></label>
+					<button class="roundbtn" type="submit" style=" position:absolute; top:250px; right:240px;"><i class="fa fa-chevron-right" ></i></button>
+				</form>
+				<form action="/update" class="form-container">
+					<span id="personal">
+					<label for="email"><b>Email(Username)</b></label><span name="show" style="display:none;" id="1"></span>
+					<input type="text" id="email" name="email" style="width:97%" value="<%= myAccount.username %>" readonly>
+					<label for="phn"><b>Phone Number</b></label><span name="show" style="display:none;" id="2"></span>
+    				<input type="text"  placeholder="Phone Number" id="phn" name="phn" style="width:97%" value="" required>
+					<label for="name"><b>Name</b></label><span name="show" style="display:none;" id="3"></span>
+					<input type="text" id="name" name="name" style="width:97%" value="<%= myAccount.name %>" required>
+					</span>
+					<span id="medical" style="display:none;">
+					<label for="degree"><b>Medical Degrees</b></label><span name="show" style="display:none;" id="4"></span>
+					<input type="text" placeholder="Medical Degrees" id="degree" name="degree" style="width:97%" value="" required>
+					<label for="regno"><b>Registration Number</b></label><span name="show" style="display:none;" id="5"></span>
+					<input type="text" placeholder="Registration Number(Provided by Medical Council)" id="regno" name="regno" style="width:97%" value="" required>
+					<label for="license"><b>License</b></label><span name="show" style="display:none;" id="6"></span>
+					<input type="file" id="license" name="license" style="width:97%" value="" required>
+					<label for="spec"><b>Specialities</b></label><br><span name="show" style="display:none;" id="7"></span>
+					<input type="hidden" id="cspec" value=1>
+					<input type="text" placeholder="specialities1" id="spec1" name="specs" required style="float:left;">
+					<input type="text" placeholder="specialities2" id="spec2" name="specs" style="display:none; float:left">
+					<input type="text" placeholder="specialities3" id="spec3" name="specs" style="display:none; float:left">
+					<input type="text" placeholder="specialities4" id="spec4" name="specs" style="display:none; float:left">
+					<input type="text" placeholder="specialities5" id="spec5" name="specs" style="display:none; float:left">
+					<button type="button" onclick="spec()" class="addbtn" id="specadd"><b>+</b></button>
+					</span>
+					<span id="address" style="display:none;">
+					<br><label for="addr"><b>Address</b></label><span name="show" style="display:none;" id="8"></span>
+					<input type="text"  placeholder="Address"id="addr" name="addr" style="width:97%" value="" required>
+					<label for="city"><b>City</b></label><span name="show" style="display:none;" id="9"></span>
+					<input type="text" placeholder="City" id="city" name="city" style="width:97%" value="" required>
+					<label for="country"><b>Country</b></label><span name="show" style="display:none;" id="10"></span>
+					<input type="text" placeholder="Country" id="country" name="country" style="width:97%" value="" required>
+					</span>
+					<br><br>
+					<button type="submit" class="btn" id="submit" style="display: none;">Submit</button>
+					<button type="button" class="cnfbtn" id="confirm" onclick="cnf()">Confirm</button>
+					<button type="button" class="cnfbtn" id="back" style="background-color:red;display:none;" onclick="bck()">Back</button>
+				</form>
+			</div>
+		</div>
+</body>
+</html>

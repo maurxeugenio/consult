@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+	<title>WebDocX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="/scripts/home.js"></script>
+</head>
+<body >
+
+  <div class="notification" id="notification">
+    <b>Now we are providing Consultation For COVID-19 too.</b>
+    <button class="buttontrans not" style="border-radius:10px; font-size:16px;" >Precautions</button>
+    <span onclick="document.getElementById('notification').style.display='none'" class="close" title="Close Modal">&times;</span>
+  </div>
+
+  <!--Alert messages-->
+  <div class="alert-msg">
+    <% if (errorMessage && errorMessage.length > 0) { %>
+      <div class="alert alert-danger" role="alert">
+        <%= errorMessage %>
+      </div>
+    <% } %>
+    
+    <% if (successMessage && successMessage.length > 0){ %>
+      <div class="alert alert-success" role="alert">
+        <%= successMessage %>
+      </div>
+    <% } %>
+  </div>
+  
+  <div class="col-container sticky">
+    <div id="logobar" class="col column5" align="left" style="padding:0px">
+      <img class="logo" src="images/logo.jpg" height="100" width="200">
+    </div>
+    <img id="clogobar" class="logo hidden" src="images/logo.jpg" height="100" width="200">
+    <div class="col column5" align="right" style="padding:0px">
+      <a href="#" class="fa fa-facebook"></a>
+					<a href="#" class="fa fa-twitter"></a>
+					<a href="#" class="fa fa-google"></a>
+					<a href="#" class="fa fa-linkedin"></a>
+					<a href="#" class="fa fa-youtube"></a>
+					<a href="#" class="fa fa-instagram"></a>
+    <button class="buttontrans borderless" onclick="document.getElementById('id01').style.display='block'">Login</button>
+    <button class="buttontrans" onclick="document.getElementById('id03').style.display='block'">Sign Up</button>
+    </div>
+  </div>
+  <div class="col-container">
+    <div class="col column5" align="left">
+      <font color="#66ffff">
+      <h1>Bringing Patients AND Doctors Together Worldwide.</h1>
+    </font>
+    <div class="col-container">
+      <div class="col column5">
+        <h1>For Doctors</h1>
+        <p>Now you can attend to many more patients even from your home. Attend to patients WorldWide.</p>
+      </div>
+      <div class="col column5">
+        <h1>For Patients</h1>
+        <p>Finding a doctor becomes much more easier. You dont need to leave your House. A 24/7 Service in your palm. Connecting you to Doctors WorldWide.</p>
+      </div>
+    </div>
+
+    <div class="col-container">
+      <div class="col column5">
+        <button class="buttongreen borderless" style="width:100%; height:50px;" onclick="document.getElementById('id04').style.display='block'">Register Now</button>
+      </div>
+      <div class="col column5">
+        <button class="buttonwhite" style="width:80%; height:50px;" onclick="document.getElementById('id05').style.display='block'">Sign Up & Consult</button>
+      </div>
+    </div>
+    </div>
+    <div class="col column5" style="background-image: url('images/background.jpg'); background-repeat: no-repeat;background-size: 100% 450px;">
+    </div>
+  </div>
+
+  <!--The footer starts-->
+  <div style="background-color: #000000; background-image: linear-gradient(147deg, #000000 0%, #434343 74%); color:white">
+
+  <!--This is For Contact Info-->
+  <div align="center"><h1>Reach Us At</h1></div>
+  <div>
+    <div class="col-container">
+      <div class="col column3">
+        <div class="col-container">
+          <div class="col column3" style="border:solid;background-image: url('images/phone.png'); background-repeat: no-repeat;background-size: 100% 100%;">
+          </div>
+          <div class="col column7" style="border:solid;height:100px;">
+            <p style="color:white;">Call Us Now!</p>
+            <a href="tel:123-456-7890">123-456-7890</a>
+          </div>
+        </div>
+      </div>
+      <div class="col column3">
+        <div class="col-container">
+          <div class="col column3" style="border:solid; background-image: url('images/email.png'); background-repeat: no-repeat;background-size: 100% 100%;">
+          </div>
+          <div class="col column7" style="border:solid; height:100px;">
+            <p style="color:white;">Drop Us an Email!</p>
+            <a href = "mailto: webdoc.2019@gmail.com">webdoc.2019@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="col column3">
+        <div class="col-container">
+          <div class="col column3" style="border:solid;background-image: url('images/clock.png'); background-repeat: no-repeat;background-size: 100% 100%;">
+          </div>
+          <div class="col column7" style="border:solid;height:100px;">
+            <p style="color:white;">Our Active Hours:</p>
+            We are available 24 x 7!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div style="background-color:black;color:grey; height: 50px;padding: 20px 50px;">
+          Copyright © 2020 WebDoc. All rights reserved.
+  </div>
+  <button onclick="topFunction()" id="myBtn" title="Go to top"><b>&uarr;</b></button>
+
+
+  <!--Doctor Login Form-->
+  <div id="id01" class="modal">
+  
+    <form class="modal-content animate" action="/doctor/auth/login" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <h1>Welcome Back!</h1>
+        <img class="avatar active" src="images/doctor.png">
+        <button class="buttontrans borderless" style="padding:0px 0px;" onclick="patl()"><img class="avatar" src="images/patient.png"></button>
+      </div>
+  
+      <div class="container">
+        <label for="email"><b>Username</b></label>
+        <input type="text" placeholder="Enter Mail" id="email" name="username" required>
+  
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password01" name="password" required>
+        <input type="checkbox" id="01" onclick="myFunction('01')">Show Password<br>
+          
+        <button type="submit" class="buttongreen borderless">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" id="remember" name="remember"> Remember me
+        </label>
+        <span class="psw"><a href="#" style="color:black;">Forgot password?</a></span>
+      </div>
+    </form>
+  </div>
+
+  <!--Patient Login Form-->
+  <div id="id02" class="modal">
+  
+    <form class="modal-content animate" action="/patient/auth/login" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <h1>Welcome Back!</h1>
+        <button class="buttontrans borderless" style="padding:0px 0px;" onclick="docl()"><img class="avatar" src="images/doctor.png"></button>
+        <img class="avatar active" src="images/patient.png">
+      </div>
+  
+      <div class="container">
+        <label for="email"><b>Username</b></label>
+        <input type="text" placeholder="Enter Mail" id="email" name="username" required>
+  
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password02" name="password" required>
+        <input type="checkbox" id="02" onclick="myFunction('02')">Show Password<br>
+          
+        <button type="submit" class="buttongreen borderless">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" id="remember" name="remember"> Remember me
+        </label>
+        <span class="psw"><a href="#" style="color:black;">Forgot password?</a></span>
+      </div>
+    </form>
+  </div>
+
+<!--Choice sign up Form-->
+<div id="id03" class="modal">
+  <div class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <h1>You Are?</h1>
+    </div>
+    <div class="col-container" align="center">
+      <div class="col column3"><button class="buttontrans" style="padding:0px 0px;" onclick="m1()"><img src="images/doctor.png" height="200" width="200"></button><br><h1>Doctor</h1></div>
+      <div class="col column3"><button class="buttontrans" style="padding:0px 0px;" onclick="m2()"><img src="images/patient.png" height="200" width="200"></button><br><h1>Patient</h1></div>
+    </div>
+  </div>
+</div>
+
+<!--Doctor signup-->
+<div id="id04" class="modal">
+  
+  <form class="modal-content animate" action="/doctor/auth/register" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <h1>Lets Get You Started!</h1>
+      <img class="avatar active" src="images/doctor.png">
+      <button class="buttontrans borderless" style="padding:0px 0px;" onclick="pats()"><img class="avatar" src="images/patient.png"></button>
+    </div>
+
+    <div class="container">
+      <label for="name"><b>Name</b></label>
+      <input type="text" placeholder="Full Name" id="name" name="name" required>
+
+      <label for="email"><b>Username</b></label>
+      <input type="text" placeholder="Enter Mail" id="email" name="username" required>
+
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password04" name="password" required>
+      <input type="checkbox" id="04" onclick="myFunction('04')">Show Password<br>
+
+      <label for="cpassword"><b>Confirm Password</b></label>
+      <input type="password" placeholder="Enter Password" id="cpassword" name="password2" required>
+        
+      <label>
+        <input type="checkbox" checked="checked" id="t&c" name="t&c" onchange="document.getElementById('signup').disabled = !this.checked;">I accept all <a href="#">Terms & Condition</a>.
+      </label><br>
+
+      <button type="submit" id="signup" class="buttongreen borderless">Sign Up</button>
+    </div>
+  </form>
+</div>
+
+<!--Patient Signup-->
+<div id="id05" class="modal">
+  
+  <form class="modal-content animate" action="/patient/auth/register" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id05').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <h1>Lets Get You Started!</h1>
+      <button class="buttontrans borderless" style="padding:0px 0px;" onclick="docs()"><img class="avatar" src="images/doctor.png"></button>
+      <img class="avatar active" src="images/patient.png">
+    </div>
+
+    <div class="container">
+      <label for="name"><b>Name</b></label>
+      <input type="text" placeholder="Full Name" id="name" name="name" required>
+
+      <label for="email"><b>Username</b></label>
+      <input type="text" placeholder="Enter Mail" id="email" name="username" required>
+
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="password05" name="password" required>
+      <input type="checkbox" id="05" onclick="myFunction('05')">Show Password<br>
+
+      <label for="cpassword"><b>Confirm Password</b></label>
+      <input type="password" placeholder="Enter Password" id="cpassword" name="password2" required>
+        
+      <label>
+        <input type="checkbox" checked="checked" id="t&c" name="t&c" onchange="document.getElementById('signup').disabled = !this.checked;">I accept all <a href="#">Terms & Condition</a>.
+      </label><br>
+
+      <button type="submit" id="signup" class="buttongreen borderless">Sign Up</button>
+    </div>
+  </form>
+</div> 
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WebDocX</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/dashboardPat.css">
+</head>
+<body>
+	<div class="topnav">
+		<button id="dash" style="background-color:white;color:black;">Dashboard</button>
+		<button id="doc" >Doctors</button>
+		<button id="logout" style="float:right;">Logout</button>
+		<script type="text/javascript">
+			document.getElementById("dash").onclick = function () {
+				location.href = "/dashboardPat";
+			};
+			document.getElementById("logout").onclick = function () {
+				location.href = "/logout";
+			};
+		</script>
+	</div>
+	<h1>Doctor Dashboard</h1>
+	<li><a href="/update">Update</a></li>
+	<li><a href="/logout">Logout</a></li>
+</body>
+</html>
